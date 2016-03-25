@@ -43,6 +43,7 @@ Is it 100 > 2 ?
 a=1
 ;->
 8-(3822)-777-88-99
+To enable JavaScript on a page you should place your code in the <script> tag
 ```
 
 Решения присылать на адрес dnkolegov@yandex.ru.
