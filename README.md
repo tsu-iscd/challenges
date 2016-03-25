@@ -47,6 +47,16 @@ To enable JavaScript on a page you should place your code in the <script> tag
 ```
 
 ### Задание 5.
+Какие уязвимости содержатся в следующем фрагменте кода?
+Каким образом можно воспользоваться данными уязвимостями для проведения атаки на систему? Описать последовательность выполняемых действий.
+
+ ```
+<?php
+$file = rawurldecode($_REQUEST['file']);
+$file = preg_replace('/^.+[\\\\\\/]/', '', $file);
+include("/inc/{$file}.php");
+?>
+```
 
 ### Задание 6.
 
@@ -55,6 +65,43 @@ To enable JavaScript on a page you should place your code in the <script> tag
 ### Задание 8.
 
 ### Задание 9.
+Какие уязвимости содержатся в следующем фрагменте кода? Каким образом можно воспользоваться данными уязвимостями для проведения атаки на систему? Описать последовательность выполняемых действий.
+
+```
+<?php
+*
+CREATE TABLE `message` (
+`remote_addr` TEXT NOT NULL ,
+`user_agent` TEXT NOT NULL ,
+`name` TEXT NOT NULL ,
+`text` TEXT NOT NULL
+) ENGINE = MYISAM ;
+INSERT INTO `message` (`remote_addr`, `user_agent`, `name`, `text`) VALUES('127.0.0.0', 'Fire Walk With Me', 'test name', 'test text');
+INSERT INTO `message` (`remote_addr`, `user_agent`, `name`, `text`) VALUES('127.0.0.0', 'Abandon all hope, ye who enter here', 'test name2', 'test text2');
+*/
+ 
+$link = mysql_connect("localhost", "root", "");
+mysql_select_db("positive", $link);
+$ip = $_SERVER["REMOTE_ADDR"];
+if(isset($_SERVER["HTTP_X_REAL_IP"])) {
+    $ip = $_SERVER["HTTP_X_REAL_IP"];
+}
+$ip = addslashes($ip);
+$user_agent = addslashes($_SERVER["HTTP_USER_AGENT"]);
+$ip = substr($ip, 0, 15); // max length 15
+if(isset($_POST["name"]) && isset($_POST["text"])) {
+    $text = addslashes($_POST["text"]);
+    $name = addslashes($_POST["name"]);
+    $query = mysql_query("INSERT INTO `message` (`remote_addr`, `user_agent`, `name`, `text`) VALUES('{$ip}', '{$user_agent}', '{$name}', '{$text}');", $link);
+}
+$query = mysql_query("SELECT * FROM `message`;", $link);
+echo("<table>");
+while($row = mysql_fetch_assoc($query)) {
+   echo("<tr><td>{$row["name"]}</td><td>{$row["text"]}</td></tr>");
+}
+echo("</table>");
+?>
+```
 
 ### Задание 10.
 
