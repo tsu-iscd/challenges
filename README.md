@@ -46,4 +46,16 @@ a=1
 To enable JavaScript on a page you should place your code in the <script> tag
 ```
 
+### Задание 5.
+
+### Задание 6.
+
+### Задание 7.
+
+### Задание 8.
+
+### Задание 9.
+
+### Задание 10.
+
 Решения присылать на адрес dnkolegov@yandex.ru.
