@@ -59,6 +59,17 @@ include("/inc/{$file}.php");
 ```
 
 ### Задание 6.
+При обращении к URL вида `http://example.com/form?foo=test` значение параметра `foo` вставляется в форму без всякой предварительной обработки:
+
+```
+<form action="/form">
+  <input name='foo' type='text' value='test'>
+  <input name='bar' type='text' value='baz'>
+  <input name='token' type='text' value='807423475023846034058234758345727'>
+  <input type='submit' value='Submit'>
+</form>
+```
+Написать эксплоит наименьшей длины, который позволяет украсть (т.е. отправить его злоумышленнику) значение парамтра `token`.
 
 ### Задание 7.
 
